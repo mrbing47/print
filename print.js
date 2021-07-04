@@ -1,39 +1,29 @@
-function combine_str() {
-	const result = [];
-	for (let i of arguments) {
-		if (typeof i === "string") result.push(i);
-	}
-	return result;
-}
-
-function combine_obj() {
-	let result = {};
-	for (let i of arguments) {
-		if (i instanceof Object && !(i instanceof Array)) result = { ...result, ...i };
-	}
-	return result;
-}
-
 function seperate_arr() {
-	const result_str = [];
-	const result_obj = {};
+	const result_arr = [];
+	let result_obj = {};
 
 	for (let i of arguments) {
-		if (i instanceof Array) {
-			result_str = [...result_str, ...combine_str(...i)];
-			result_obj = { ...result_str, ...combine_obj(...i) };
+		if (i instanceof Object) {
+			if (i instanceof Array) {
+				[str, obj] = seperate_arr(...i);
+				result_arr.push(...str);
+				result_obj = { ...result_obj, ...obj };
+			} else result_obj = { ...result_obj, ...i };
+		} else {
+			let temp = i;
+			if (typeof i !== "number") temp = i.toString();
+			result_arr.push(temp);
 		}
 	}
 
-	return [result_str, result_obj];
+	return [result_arr, result_obj];
 }
 
 function print() {
 	const string = arguments[0].toString();
 	const variables = [...arguments].slice(1);
 
-	const str = combine_str(...variables);
-	const obj = combine_obj(...variables);
+	const [str, obj] = seperate_arr(...variables);
 
 	let counter = 0;
 	let isOpen = false;
