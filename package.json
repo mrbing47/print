@@ -1,15 +1,18 @@
 {
 	"name": "printin",
-	"version": "1.0.2",
+	"version": "1.0.5",
 	"description": "A tool to print your data more effectively.",
 	"main": "printin.js",
 	"keywords": [
+		"printin",
+		"print",
 		"template",
 		"string",
 		"format",
 		"replace",
 		"arguments",
-		"readable"
+		"readable",
+		"accessibility"
 	],
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"

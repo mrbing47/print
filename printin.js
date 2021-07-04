@@ -27,19 +27,23 @@ function print() {
 
 	let counter = 0;
 	let isOpen = false;
+	let isEsacpe = false;
 	let result = "";
 	let key = "";
 	let isUnused = false;
 	let i;
 
 	for (i = 0; i < string.length; i++) {
-		if (string[i] === "&" && (string[i + 1] === "{" || string[i + 1] === "}")) continue;
-		if (string[i] === "{" && !(i > 0 && string[i - 1] === "&")) {
+		if ((string[i] === "{" && string[i + 1] === "{") || (string[i] === "}" && string[i + 1] === "}")) {
+			isEsacpe = true;
+			continue;
+		}
+		if (string[i] === "{" && !isEsacpe) {
 			if (isOpen) throw new Error("Cannot open a bracket without closing another.");
 			else isOpen = true;
 			continue;
 		}
-		if (string[i] === "}" && !(i > 0 && string[i - 1] === "&")) {
+		if (string[i] === "}" && !isEsacpe) {
 			if (!isOpen) throw new Error("Cannot close a bracket without opening it.");
 			else {
 				key = key.trim();
@@ -72,7 +76,7 @@ function print() {
 			}
 			continue;
 		}
-
+		isEsacpe = false;
 		if (!isOpen) result += string[i];
 		else key += string[i];
 	}
@@ -89,4 +93,4 @@ function print() {
 	}
 }
 
-module.exports.printin = print;
+module.exports = print;

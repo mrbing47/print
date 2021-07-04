@@ -19,11 +19,11 @@ print("{~message~} {~name~}", "Hello", "NODE");
 
 ---
 
-To esacpe the brackets and prevent yourself from errors, use `&{` and `&}`
+To esacpe the brackets and prevent yourself from errors, use `{{` and `}}`
 and the code will treat the brackets like normal characters.
 
 ```
-print("{~message~} {~name~} &{🙃&}", "Hello", "NODE");
+print("{~message~} {~name~} {{🙃}}", "Hello", "NODE");
 >> Hello NODE {🙃}
 ```
 
