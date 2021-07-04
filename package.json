@@ -2,7 +2,7 @@
 	"name": "printin",
 	"version": "1.0.2",
 	"description": "A tool to print your data more effectively.",
-	"main": "print.js",
+	"main": "printin.js",
 	"keywords": [
 		"template",
 		"string",
