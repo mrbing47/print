@@ -11,7 +11,7 @@ This use template strings to make printing flexible. Use `{}` in your string and
 You can use comments in `{}` by writing the text between ~ for better readability.
 
 ```Javascript
-print("{~message~} {~name~}", "Hello", "NODE")
+print("{~message~} {~name~}", "Hello", "NODE");
 >> Hello NODE
 ```
 
@@ -23,7 +23,7 @@ To esacpe the brackets and prevent yourself from errors, use `&{` and `&}`
 and the code will treat the brackets like normal characters.
 
 ```
-print("{~message~} {~name~} &{🙃&}", "Hello", "NODE")
+print("{~message~} {~name~} &{🙃&}", "Hello", "NODE");
 >> Hello NODE {🙃}
 ```
 
@@ -55,9 +55,8 @@ Try combining it with [chalk.js][chalk] to see the different possiblities.
 <br>
 
 ![Code Example][print_example]
+<br><br>
 ![Console Output][print_console]
-
-<br>
 
 [chalk]: https://www.npmjs.com/package/chalk
 [print_example]: ./media/print_example.png
@@ -67,4 +66,12 @@ Try combining it with [chalk.js][chalk] to see the different possiblities.
 
 ```
 The functions will be returned until all the brackets are occupied.
+```
+
+To view what is the current state of the string in returned function, use
+
+```Javascript
+const message = print("{~message~} {~name~}", "Hello");
+console.log(message.string);
+>> Hello {~name~}
 ```
