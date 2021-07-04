@@ -98,3 +98,5 @@ function print() {
 		return anonymous;
 	}
 }
+
+module.exports = print;
