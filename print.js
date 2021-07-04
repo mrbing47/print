@@ -1,5 +1,3 @@
-const chalk = require("chalk");
-
 function combine_str() {
 	const result = [];
 	for (let i of arguments) {
@@ -100,13 +98,3 @@ function print() {
 		return anonymous;
 	}
 }
-
-error = print("{~type~}: {~resource~} {~message~}", chalk.red("ERROR:"));
-console.log(error.string);
-memory = error(chalk.yellow("MEMORY"));
-memory("OUT OF STORAGE!");
-memory("REFERNCE NOT FOUND!");
-
-print("{0} vs {team_name}: {team_score} at {team_wicket~}", { team_name: "CSK", team_score: 50, "team_wicket~": 5 }, "KKR");
-
-print("{} {0}", "HELLO", "THERE");
