@@ -1,4 +1,4 @@
-const print = require("./print");
+const print = require("./printin");
 const chalk = require("chalk");
 
 error = print("{~type~}: {~resource~} {~message~}", chalk.red("ERROR"));

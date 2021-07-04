@@ -1,4 +1,4 @@
-# Print.JS
+# PrintIn
 
 This is a tool used to print data in a proper format according to your needs.
 <br>
@@ -54,13 +54,15 @@ Try combining it with [chalk.js][chalk] to see the different possiblities.
 
 <br>
 
-![Code Example][print_example]
-<br><br>
-![Console Output][print_console]
+![Code Example][printin_example]
+
+<br>
+
+![Console Output][printin_console]
 
 [chalk]: https://www.npmjs.com/package/chalk
-[print_example]: ./media/print_example.png
-[print_console]: ./media/print_console.png
+[printin_example]: ./media/printin_example.png
+[printin_console]: ./media/printin_console.png
 
 ## Note
 
