@@ -89,4 +89,4 @@ function print() {
 	}
 }
 
-module.exports = print;
+module.exports.printin = print;
