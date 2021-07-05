@@ -51,6 +51,24 @@ Pass the array rather together rather than passing the parameters individually. 
 
 Try combining it with [chalk.js][chalk] to see the different possiblities.
 
+## Current State
+
+Current state of the string in returned function:
+
+```Javascript
+const message = print("{~message~} {~name~}", "Hello");
+console.log(message.string);
+>> Hello {~name~}
+```
+
+Current state of unused brackets in returned function:
+
+```Javascript
+const message = print("{~message~} {~name~}", "Hello");
+console.log(message.unused);
+>> [ { unused: '{~name~}', index: 6 } ]
+```
+
 ## Examples
 
 ---
@@ -70,13 +88,13 @@ Try combining it with [chalk.js][chalk] to see the different possiblities.
 ## Note
 
 ```
-- The functions will be returned until all the brackets are occupied.
+The functions will be returned until all the brackets are occupied.
 ```
 
-To view what is the current state of the string in returned function, use
+In the case of strings like
 
 ```Javascript
-const message = print("{~message~} {~name~}", "Hello");
-console.log(message.string);
->> Hello {~name~}
+print("{5}")
 ```
+
+You will need to pass **6 arguments** where the **first 5 arguments** will be _dumped_ and the **6th one** is placed in the string.
