@@ -11,11 +11,11 @@ This use template strings to make printing flexible. Use `{}` in your string and
 You can use comments in `{}` by writing the text between ~ for better readability.
 
 ```Javascript
-print("{~message~} {~name~}", "Hello", "NODE");
->> Hello NODE
+print("{~message~} {~name~}", "Hello", "Node");
+>> Hello Node
 
-print("{} {~resource~}", chalk.red("ERROR"), "MEMORY");
->> ERROR MEMORY
+print("{~resource~} {}", "Memory", "Stack Overflow");
+>> Memory Stack Overflow
 ```
 
 ## Escape Character
@@ -25,9 +25,9 @@ print("{} {~resource~}", chalk.red("ERROR"), "MEMORY");
 To esacpe the brackets and prevent yourself from errors, use `{{` and `}}`
 and the code will treat the brackets like normal characters.
 
-```
-print("{~message~} {~name~} {{🙃}}", "Hello", "NODE");
->> Hello NODE {🙃}
+```Javascript
+print("{~message~} {~name~} {{🙃}}", "Hello", "Node");
+>> Hello Node {🙃}
 ```
 
 ## Referencing
@@ -38,14 +38,29 @@ print("{~message~} {~name~} {{🙃}}", "Hello", "NODE");
 
 Sometimes the order of passed elements does not match their order in the string. Use Indexes starting from **`0`** and the function will replace the passed Strings or Data from `left to right` as if they are in array.
 
+```Javascript
+print("{1} {3} {2} {0}", "A", "B", "C", "D")
+>> B D C A
+```
+
 -   ### Keys
 
 You can also pass valid JS `keys` between the `{}` and then pass the JS Object to
 with the same keys and their values. Values will be overridden from `left to right`.
 
+```Javascript
+print("{message} {name}", { message: "Hello", name: "Nathan" })
+>> Hello Nathan
+```
+
 -   ### Arrays
 
 Pass the array rather together rather than passing the parameters individually. The values are extracted from the array and sorted out in 2 portions, ie. Strings and Numbers; and Objects. The Strings are then added from `left to right`. The Objects are evaluated in the same way.
+
+```Javascript
+print("{1} {3} {2} {0}", ["A", ["B", "C"]], ["D"])
+>> B D C A
+```
 
 <br>
 
@@ -75,9 +90,13 @@ console.log(message.unused);
 
 <br>
 
+### CODE
+
 ![Code Example][printin_example]
 
 <br>
+
+### OUTPUT
 
 ![Console Output][printin_console]
 

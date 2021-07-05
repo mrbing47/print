@@ -1,6 +1,6 @@
 {
 	"name": "printin",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"description": "A tool to print your data more effectively.",
 	"main": "printin.js",
 	"keywords": [
