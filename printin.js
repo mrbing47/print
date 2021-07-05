@@ -19,12 +19,7 @@ function seperate_arr() {
 	return [result_arr, result_obj];
 }
 
-function print() {
-	const string = arguments[0].toString();
-	const variables = [...arguments].slice(1);
-
-	const [str, obj] = seperate_arr(...variables);
-
+function process_string(string, isIkey, str, obj = {}) {
 	let counter = 0;
 	let isOpen = false;
 	let isEsacpe = false;
@@ -32,6 +27,7 @@ function print() {
 	let key = "";
 	let isUnused = false;
 	let i;
+	const indexes = [];
 
 	for (i = 0; i < string.length; i++) {
 		// Checks for the esacpe pattern, ie {{ and }}
@@ -57,9 +53,12 @@ function print() {
 			const isNum = /^\d+$/.test(key);
 			if (isNum) {
 				const num = parseInt(key);
-				if (num < str.length) result += str[num];
-				else {
-					result += "{" + (num - str.length) + "}";
+				if (num < str.length && isIkey) {
+					result += str[num];
+					indexes.push(num);
+				} else {
+					const placeholder = num >= str.length && isIkey ? num - str.length : num;
+					result += "{" + placeholder + "}";
 					isUnused = true;
 				}
 			} else {
@@ -75,17 +74,15 @@ function print() {
 					}
 				} else {
 					//Here we will treat comments as empty brackets and if the value is not found, maintain the comment.
-					if (counter < str.length) result += str[counter++];
+					if (!isIkey && counter < str.length) result += str[counter++];
 					else {
-						isUnused = true;
-
+						isUnused = isIkey && !isUnused ? false : true;
 						result += "{" + (isComment ? key : "") + "}";
 					}
 				}
-
-				key = "";
-				isOpen = false;
 			}
+			key = "";
+			isOpen = false;
 			continue;
 		}
 		isEsacpe = false;
@@ -93,7 +90,25 @@ function print() {
 		else key += string[i];
 	}
 
-	if (!isUnused) {
+	indexes.sort((a, b) => b - a);
+	for (let i of indexes) {
+		console.log(i, str[i]);
+		str.splice(i, 1);
+	}
+
+	return [result, isUnused];
+}
+
+function print() {
+	const string = arguments[0].toString();
+	const variables = [...arguments].slice(1);
+
+	const [str, obj] = seperate_arr(...variables);
+
+	const [result_ik, isUnused_ik] = process_string(string, true, str, obj);
+	const [result, isUnused] = process_string(result_ik, false, str);
+
+	if (!(isUnused || isUnused_ik)) {
 		console.log(result);
 		return;
 	} else {

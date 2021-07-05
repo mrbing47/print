@@ -11,11 +11,11 @@ teams = print("{team_a}: {a_score} vs {team_b}: {b_score}")({ team_a: "ABC", tea
 console.log(teams.string);
 teams({ a_score: 2, b_score: 3 });
 
-print("{}, {}, {}, {}")("C")("D")("A")("B");
+print("{3}, {}, {}, {}")("C")("D")("A")("B");
 
-print("{2}, {3}, {0}, {1}")("C")("D")("A")("B");
+print("{2}, {}, {}, {1}")("C")("D")("A")("B");
 
-print("{2}, {3}, {0}, {1}", ["Y", "Z", "W", "X"]);
+print("{}, {3}, {0}, {1}", ["Y", "Z", "W", "X"]);
 
 print("{}, {}, {}, {}", ["Y", "Z", "W", "X"]);
 

@@ -71,7 +71,6 @@ Try combining it with [chalk.js][chalk] to see the different possiblities.
 
 ```
 - The functions will be returned until all the brackets are occupied.
-- Don't use Indexes and Empty brackets together, it will generate unexpected results.
 ```
 
 To view what is the current state of the string in returned function, use
