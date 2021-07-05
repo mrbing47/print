@@ -14,8 +14,8 @@ You can use comments in `{}` by writing the text between ~ for better readabilit
 print("{~message~} {~name~}", "Hello", "NODE");
 >> Hello NODE
 
-print("{} {~resource~}", chalk.red("ERROR)", "MEMORY");
->> Hello NODE
+print("{} {~resource~}", chalk.red("ERROR"), "MEMORY");
+>> ERROR MEMORY
 ```
 
 ## Escape Character
