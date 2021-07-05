@@ -28,6 +28,7 @@ function process_string(string, isIkey, str, obj = {}) {
 	let isUnused = false;
 	let i;
 	const indexes = [];
+	const unused = [];
 
 	for (i = 0; i < string.length; i++) {
 		// Checks for the esacpe pattern, ie {{ and }}
@@ -58,6 +59,14 @@ function process_string(string, isIkey, str, obj = {}) {
 					indexes.push(num);
 				} else {
 					const placeholder = num >= str.length && isIkey ? num - str.length : num;
+
+					if (isIkey) {
+						unused.push({
+							unused: placeholder,
+							index: result.length,
+						});
+					}
+
 					result += "{" + placeholder + "}";
 					isUnused = true;
 				}
@@ -69,6 +78,13 @@ function process_string(string, isIkey, str, obj = {}) {
 				if (key !== "" && !isComment) {
 					if (obj[key]) result += obj[key];
 					else {
+						if (isIkey) {
+							unused.push({
+								unused: key,
+								index: result.length,
+							});
+						}
+
 						result += "{" + key + "}";
 						isUnused = true;
 					}
@@ -76,8 +92,14 @@ function process_string(string, isIkey, str, obj = {}) {
 					//Here we will treat comments as empty brackets and if the value is not found, maintain the comment.
 					if (!isIkey && counter < str.length) result += str[counter++];
 					else {
+						if (!isIkey) {
+							unused.push({
+								unused: key,
+								index: result.length,
+							});
+						}
 						isUnused = isIkey && !isUnused ? false : true;
-						result += "{" + (isComment ? key : "") + "}";
+						result += "{" + key + "}";
 					}
 				}
 			}
@@ -92,11 +114,10 @@ function process_string(string, isIkey, str, obj = {}) {
 
 	indexes.sort((a, b) => b - a);
 	for (let i of indexes) {
-		console.log(i, str[i]);
 		str.splice(i, 1);
 	}
 
-	return [result, isUnused];
+	return [result, isUnused, unused];
 }
 
 function print() {
@@ -105,8 +126,12 @@ function print() {
 
 	const [str, obj] = seperate_arr(...variables);
 
-	const [result_ik, isUnused_ik] = process_string(string, true, str, obj);
-	const [result, isUnused] = process_string(result_ik, false, str);
+	const [result_ik, isUnused_ik, unused_ik] = process_string(string, true, str, obj);
+	const [result, isUnused, unused] = process_string(result_ik, false, str);
+
+	const unused_arr = [...unused, ...unused_ik];
+
+	unused.sort((a, b) => a.index - b.index);
 
 	if (!(isUnused || isUnused_ik)) {
 		console.log(result);
@@ -116,6 +141,7 @@ function print() {
 			return print(result, ...arguments);
 		};
 		anonymous.string = result;
+		anonymous.unused = unused_arr;
 		return anonymous;
 	}
 }
