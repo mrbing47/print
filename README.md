@@ -34,6 +34,15 @@ print("{~message~} {~name~} {{🙃}}", "Hello", "Node");
 
 ---
 
+-   ### Empty
+
+You can simpy use {} where you want to substitute data in the string. The data will be picked and placed from `left to right`. Brackets with comments _( eg. {~message~} )_ will be also **treated as empty brackets**.
+
+```Javascript
+print("{} {} {} {}", "A")("B", "C", "D")
+>> A B C D
+```
+
 -   ### Indexes
 
 Sometimes the order of passed elements does not match their order in the string. Use Indexes starting from **`0`** and the function will replace the passed Strings or Data from `left to right` as if they are in array.
