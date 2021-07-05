@@ -6,8 +6,6 @@ This use template strings to make printing flexible. Use `{}` in your string and
 
 ## Comments
 
----
-
 You can use comments in `{}` by writing the text between ~ for better readability.
 
 ```Javascript
@@ -20,8 +18,6 @@ print("{~resource~} {}", "Memory", "Stack Overflow");
 
 ## Escape Character
 
----
-
 To esacpe the brackets and prevent yourself from errors, use `{{` and `}}`
 and the code will treat the brackets like normal characters.
 
@@ -31,8 +27,6 @@ print("{~message~} {~name~} {{🙃}}", "Hello", "Node");
 ```
 
 ## Referencing
-
----
 
 -   ### Empty
 
@@ -95,10 +89,6 @@ console.log(message.unused);
 
 ## Examples
 
----
-
-<br>
-
 ### CODE
 
 ![Code Example][printin_example]
@@ -125,4 +115,4 @@ In the case of strings like
 print("{5}")
 ```
 
-You will need to pass **6 arguments** where the **first 5 arguments** will be _dumped_ and the **6th one** is placed in the string.
+You will need to pass **6 arguments** where the **first 5 arguments** will be _dumped_ and the **6th one** will be placed in the string.
