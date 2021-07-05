@@ -36,7 +36,7 @@ print("{~message~} {~name~} {{🙃}}", "Hello", "Node");
 
 -   ### Empty
 
-You can simpy use {} where you want to substitute data in the string. The data will be picked and placed from `left to right`. Brackets with comments _( eg. {~message~} )_ will be also **treated as empty brackets**.
+You can simpy use `{}` where you want to substitute data in the string. The data will be picked and placed from `left to right`. Brackets with comments _( eg. {~message~} )_ will be also **treated as empty brackets**.
 
 ```Javascript
 print("{} {} {} {}", "A")("B", "C", "D")
