@@ -59,15 +59,15 @@ function process_string(string, isIkey, str, obj = {}) {
 					indexes.push(num);
 				} else {
 					const placeholder = num >= str.length && isIkey ? num - str.length : num;
-
+					const res = "{" + placeholder + "}";
 					if (isIkey) {
 						unused.push({
-							unused: placeholder,
+							unused: res,
 							index: result.length,
 						});
 					}
 
-					result += "{" + placeholder + "}";
+					result += res;
 					isUnused = true;
 				}
 			} else {
@@ -78,28 +78,30 @@ function process_string(string, isIkey, str, obj = {}) {
 				if (key !== "" && !isComment) {
 					if (obj[key]) result += obj[key];
 					else {
+						const res = "{" + key + "}";
 						if (isIkey) {
 							unused.push({
-								unused: key,
+								unused: res,
 								index: result.length,
 							});
 						}
 
-						result += "{" + key + "}";
+						result += res;
 						isUnused = true;
 					}
 				} else {
 					//Here we will treat comments as empty brackets and if the value is not found, maintain the comment.
 					if (!isIkey && counter < str.length) result += str[counter++];
 					else {
+						const res = "{" + key + "}";
 						if (!isIkey) {
 							unused.push({
-								unused: key,
+								unused: res,
 								index: result.length,
 							});
 						}
 						isUnused = isIkey && !isUnused ? false : true;
-						result += "{" + key + "}";
+						result += res;
 					}
 				}
 			}
@@ -129,10 +131,6 @@ function print() {
 	const [result_ik, isUnused_ik, unused_ik] = process_string(string, true, str, obj);
 	const [result, isUnused, unused] = process_string(result_ik, false, str);
 
-	const unused_arr = [...unused, ...unused_ik];
-
-	unused.sort((a, b) => a.index - b.index);
-
 	if (!(isUnused || isUnused_ik)) {
 		console.log(result);
 		return;
@@ -141,7 +139,7 @@ function print() {
 			return print(result, ...arguments);
 		};
 		anonymous.string = result;
-		anonymous.unused = unused_arr;
+		anonymous.unused = [...unused, ...unused_ik].sort((a, b) => a.index - b.index);
 		return anonymous;
 	}
 }

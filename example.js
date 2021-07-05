@@ -13,7 +13,10 @@ console.log(teams.unused);
 console.log(teams.string);
 teams({ a_score: 2, b_score: 3 });
 
-print("{3}, {}, {}, {}")("C")("D")("A")("B");
+const temp = print("{2}, {}, {}, {}")("C");
+console.log(temp.unused);
+console.log(temp.string);
+temp("D")("A")("B");
 
 print("{2}, {}, {}, {1}")("C")("D")("A")("B");
 
