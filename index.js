@@ -38,6 +38,7 @@ function process_string(string, isIkey, str, obj = {}) {
 		// Checks for the esacpe pattern, ie {{ and }}
 		if ((string[i] === "{" && string[i + 1] === "{") || (string[i] === "}" && string[i + 1] === "}")) {
 			isEsacpe = true;
+			if (isIkey) result += string[i];
 			continue;
 		}
 
