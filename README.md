@@ -128,8 +128,8 @@ In the case of strings like
 str("{5}")
 ```
 
-You will need to pass **6 arguments** where the **first 5 arguments** will be _dumped_ and the **6th one** will be placed in the string and will be returned.
+You will need to pass **6 arguments** where the **first 5 arguments** will be _dumped_ and the **6th one** will be placed in the string and the resultant will be returned.
 
 [chalk]: https://www.npmjs.com/package/chalk
-[str_example]: ./media/str_temp_example.png
-[str_console]: ./media/str_temp_console.png
+[str_example]: https://raw.githubusercontent.com/mrbing47/str-temp/master/media/str_temp_example.png
+[str_console]: https://raw.githubusercontent.com/mrbing47/str-temp/master/media/str_temp_console.png
