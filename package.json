@@ -1,11 +1,12 @@
 {
-	"name": "printin",
-	"version": "1.0.10",
-	"description": "A tool to print your data more effectively.",
-	"main": "printin.js",
+	"name": "str-temp",
+	"version": "1.0.0",
+	"description": "A tool to combine your string and data more effectively.",
+	"main": "index.js",
 	"keywords": [
-		"printin",
-		"print",
+		"str-temp",
+		"str",
+		"temp",
 		"template",
 		"string",
 		"format",
@@ -19,12 +20,12 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/mrbing47/print.git"
+		"url": "git+https://github.com/mrbing47/str-temp.git"
 	},
 	"author": "Sarthik Garg",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/mrbing47/print/issues"
+		"url": "https://github.com/mrbing47/str-temp/issues"
 	},
-	"homepage": "https://github.com/mrbing47/print#readme"
+	"homepage": "https://github.com/mrbing47/str-temp#readme"
 }

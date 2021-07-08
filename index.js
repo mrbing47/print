@@ -19,6 +19,10 @@ function seperate_arr() {
 	return [result_arr, result_obj];
 }
 
+function split_obj(str) {
+	return str.split(/[\[\].]+/g);
+}
+
 function process_string(string, isIkey, str, obj = {}) {
 	let counter = 0;
 	let isOpen = false;
@@ -76,7 +80,21 @@ function process_string(string, isIkey, str, obj = {}) {
 
 				// If key is not empty and is not a commant then it will be the key from the obj.
 				if (key !== "" && !isComment) {
-					if (obj[key]) result += obj[key];
+					const objsplit = split_obj(key);
+
+					let objtemp = obj;
+					let hasKey = true;
+					for (let i of objsplit) {
+						if (i !== "") {
+							if (objtemp[i]) objtemp = objtemp[i];
+							else {
+								hasKey = false;
+								break;
+							}
+						}
+					}
+
+					if (hasKey) result += objtemp;
 					else {
 						const res = "{" + key + "}";
 						if (isIkey) {
@@ -122,7 +140,7 @@ function process_string(string, isIkey, str, obj = {}) {
 	return [result, isUnused, unused];
 }
 
-function print() {
+function str_temp() {
 	const string = arguments[0].toString();
 	const variables = [...arguments].slice(1);
 
@@ -132,11 +150,10 @@ function print() {
 	const [result, isUnused, unused] = process_string(result_ik, false, str);
 
 	if (!(isUnused || isUnused_ik)) {
-		console.log(result);
-		return;
+		return result;
 	} else {
 		const anonymous = function () {
-			return print(result, ...arguments);
+			return str_temp(result, ...arguments);
 		};
 		anonymous.string = result;
 		anonymous.unused = [...unused, ...unused_ik].sort((a, b) => a.index - b.index);
@@ -144,4 +161,4 @@ function print() {
 	}
 }
 
-module.exports = print;
+module.exports = str_temp;

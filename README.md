@@ -1,18 +1,18 @@
-# PrintIn
+# str-temp
 
-This is a tool used to print data in a proper format according to your needs.
+This is a tool used to process and insert data inside a string in a proper format according to your needs.
 <br>
-This use template strings to make printing flexible. Use `{}` in your string and pass the variable as parameters or pass them later by calling the returned function.
+This use template strings to make processing and storing flexible. Use `{}` in your string and pass the variable as parameters or pass them later by calling the returned function.
 
 ## Comments
 
-You can use comments in `{}` by writing the text between ~ for better readability.
+You can use comments in `{}` by writing the text between `~` for better readability.
 
 ```Javascript
-print("{~message~} {~name~}", "Hello", "Node");
+str("{~message~} {~name~}", "Hello", "Node");
 >> Hello Node
 
-print("{~resource~} {}", "Memory", "Stack Overflow");
+str("{~resource~} {}", "Memory", "Stack Overflow");
 >> Memory Stack Overflow
 ```
 
@@ -22,7 +22,7 @@ To esacpe the brackets and prevent yourself from errors, use `{{` and `}}`
 and the code will treat the brackets like normal characters.
 
 ```Javascript
-print("{~message~} {~name~} {{🙃}}", "Hello", "Node");
+str("{~message~} {~name~} {{🙃}}", "Hello", "Node");
 >> Hello Node {🙃}
 ```
 
@@ -30,10 +30,10 @@ print("{~message~} {~name~} {{🙃}}", "Hello", "Node");
 
 -   ### Empty
 
-You can simpy use `{}` where you want to substitute data in the string. The data will be picked and placed from `left to right`. Brackets with comments _( eg. {\~message\~} )_ will be also **treated as empty brackets**.
+You can simpy use `{}` where you want to substitute data in the string. The data will be picked and placed from `left to right`. Brackets with comments **( eg. {\~message\~}` )** will be also **treated as empty brackets**.
 
 ```Javascript
-print("{} {} {} {}", "A")("B", "C", "D")
+str("{} {} {} {}", "A")("B", "C", "D")
 >> A B C D
 ```
 
@@ -42,7 +42,7 @@ print("{} {} {} {}", "A")("B", "C", "D")
 Sometimes the order of passed elements does not match their order in the string. Use Indexes starting from **`0`** and the function will replace the passed Strings or Data from `left to right` as if they are in array.
 
 ```Javascript
-print("{1} {3} {2} {0}", "A", "B", "C", "D")
+str("{1} {3} {2} {0}", "A", "B", "C", "D")
 >> B D C A
 ```
 
@@ -52,8 +52,25 @@ You can also pass valid JS `keys` between the `{}` and then pass the JS Object t
 with the same keys and their values. Values will be overridden from `left to right`.
 
 ```Javascript
-print("{message} {name}", { message: "Hello", name: "Nathan" })
+str("{message} {name}", { message: "Hello", name: "Nathan" })
 >> Hello Nathan
+```
+
+Here you can also pass the key as nested object.
+
+```Javascript
+str("{message} {info.name.first}", { message: "Hello", info: { name: {
+    first: "Nathan",
+    last: "Drake"
+}}})
+>> Hello Nathan
+```
+
+With the nested objects, there will be arrays and you will be able to pass those array indexes too.
+
+```Javascript
+str("{fruit[1]} is tasty 🤤.", { fruit: [ "Banana", "Apple", "Orange"] })
+>> Apple  is tasty 🤤.
 ```
 
 -   ### Arrays
@@ -61,7 +78,7 @@ print("{message} {name}", { message: "Hello", name: "Nathan" })
 Pass the array rather together rather than passing the parameters individually. The values are extracted from the array and sorted out in 2 portions, ie. Strings and Numbers; and Objects. The Strings are then added from `left to right`. The Objects are evaluated in the same way.
 
 ```Javascript
-print("{1} {3} {2} {0}", ["A", ["B", "C"]], ["D"])
+str("{1} {3} {2} {0}", ["A", ["B", "C"]], ["D"])
 >> B D C A
 ```
 
@@ -74,7 +91,7 @@ Try combining it with [chalk.js][chalk] to see the different possiblities.
 Current state of the string in returned function:
 
 ```Javascript
-const message = print("{~message~} {~name~}", "Hello");
+const message = str("{~message~} {~name~}", "Hello");
 console.log(message.string);
 >> Hello {~name~}
 ```
@@ -82,7 +99,7 @@ console.log(message.string);
 Current state of unused brackets in returned function:
 
 ```Javascript
-const message = print("{~message~} {~name~}", "Hello");
+const message = str("{~message~} {~name~}", "Hello");
 console.log(message.unused);
 >> [ { unused: '{~name~}', index: 6 } ]
 ```
@@ -91,17 +108,13 @@ console.log(message.unused);
 
 ### CODE
 
-![Code Example][printin_example]
+![Code Example][str_example]
 
 <br>
 
 ### OUTPUT
 
-![Console Output][printin_console]
-
-[chalk]: https://www.npmjs.com/package/chalk
-[printin_example]: ./media/printin_example.png
-[printin_console]: ./media/printin_console.png
+![Console Output][str_console]
 
 ## Note
 
@@ -112,7 +125,11 @@ The functions will be returned until all the brackets are occupied.
 In the case of strings like
 
 ```Javascript
-print("{5}")
+str("{5}")
 ```
 
-You will need to pass **6 arguments** where the **first 5 arguments** will be _dumped_ and the **6th one** will be placed in the string.
+You will need to pass **6 arguments** where the **first 5 arguments** will be _dumped_ and the **6th one** will be placed in the string and will be returned.
+
+[chalk]: https://www.npmjs.com/package/chalk
+[str_example]: ./media/str_temp_example.png
+[str_console]: ./media/str_temp_console.png
