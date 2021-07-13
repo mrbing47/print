@@ -1,6 +1,6 @@
 {
 	"name": "str-temp",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "A tool to combine your string and data more effectively.",
 	"main": "index.js",
 	"keywords": [
