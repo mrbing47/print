@@ -2,7 +2,21 @@
 
 This is a tool used to process and insert data inside a string in a proper format according to your needs.
 <br>
-This use template strings to make processing and storing flexible. Use `{}` in your string and pass the variable as parameters or pass them later by calling the returned function.
+This uses template strings to make processing and storing flexible. Use `{}` in your string and pass the variable as parameters or pass them later by calling the returned function.
+
+## Basic
+
+-   The program adds the data to the brackets based on a predefined flow. The function will take it's first argument as the
+    **template string** and then the parameters.
+-   The parameters, except Objects, are added to an array. If a multi dimensional array is passed as parameter, it flattens into a single dimensional array and is added with the other array containing data parameters.
+
+-   The function will first place Index and Key values in the brackets and then it will fill the Empty or Comment brackets. The function will place the values from `left to right` brackets for the Empty or Comment brackets.
+
+```
+The called function will return a function until all the brackets are occupied. If all the brackets are occupied, the resultant string will be returned.
+```
+
+If you want to see the current state of the string, [READ THIS SECTION](#curr)
 
 ## Comments
 
@@ -18,7 +32,7 @@ str("{~resource~} {}", "Memory", "Stack Overflow");
 
 ## Escape Character
 
-To esacpe the brackets and prevent yourself from errors, use `{{` and `}}`
+To escape the brackets and prevent yourself from errors, use `{{` and `}}`
 and the code will treat the brackets like normal characters.
 
 ```Javascript
@@ -30,7 +44,7 @@ str("{~message~} {~name~} {{🙃}}", "Hello", "Node");
 
 -   ### Empty
 
-You can simpy use `{}` where you want to substitute data in the string. The data will be picked and placed from `left to right`. Brackets with comments **( eg. {\~message\~}` )** will be also **treated as empty brackets**.
+You can simply use `{}` where you want to substitute data in the string. The data will be picked and placed from `left to right`. Brackets with comments **( eg. {\~message\~}` )** will be also **treated as empty brackets**.
 
 ```Javascript
 str("{} {} {} {}", "A")("B", "C", "D")
@@ -39,7 +53,7 @@ str("{} {} {} {}", "A")("B", "C", "D")
 
 -   ### Indexes
 
-Sometimes the order of passed elements does not match their order in the string. Use Indexes starting from **`0`** and the function will replace the passed Strings or Data from `left to right` as if they are in array.
+Sometimes the order of passed elements does not match their order in the string. Use Indexes starting from **`0`** and the function will replace the passed Strings or Data from `left to right` as if they are in an array.
 
 ```Javascript
 str("{1} {3} {2} {0}", "A", "B", "C", "D")
@@ -56,7 +70,7 @@ str("{message} {name}", { message: "Hello", name: "Nathan" })
 >> Hello Nathan
 ```
 
-Here you can also pass the key as nested object.
+Here you can also pass the key as a nested object.
 
 ```Javascript
 str("{message} {info.name.first}", { message: "Hello", info: { name: {
@@ -84,9 +98,9 @@ str("{1} {3} {2} {0}", ["A", ["B", "C"]], ["D"])
 
 <br>
 
-Try combining it with [chalk.js][chalk] to see the different possiblities.
+Try combining it with [chalk.js][chalk] to see the different possibilities.
 
-## Current State
+## <a name="curr"></a>Current State
 
 Current state of the string in returned function:
 
@@ -117,10 +131,6 @@ console.log(message.unused);
 ![Console Output][str_console]
 
 ## Note
-
-```
-The functions will be returned until all the brackets are occupied.
-```
 
 In the case of strings like
 
