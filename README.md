@@ -13,7 +13,7 @@ This uses template strings to make processing and storing flexible. Use `{}` in 
 -   The function will first place Index and Key values in the brackets and then it will fill the Empty or Comment brackets. The function will place the values from `left to right` brackets for the Empty or Comment brackets.
 
 -   The called function will return a function until all the brackets are
-    occupied. If all the brackets are occupied, the resultant string will be returned. If you want to see the current state of the string, [Refer this Section](#curr).
+    occupied. If all the brackets are occupied, the resultant string will be returned. If you want to see the current state of the string, [Refer this Section](#current-state).
 
 ## Comments
 
@@ -97,7 +97,7 @@ str("{1} {3} {2} {0}", ["A", ["B", "C"]], ["D"])
 
 Try combining it with [chalk.js][chalk] to see the different possibilities.
 
-## <a name="curr"></a>Current State
+## Current State
 
 Current state of the string in returned function:
 
